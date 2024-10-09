@@ -5,6 +5,12 @@
   text-align: center;
 }
 
+body {
+  background: #1d1d1e;
+  font-family: 'Lucida Grande', 'Courier New', Courier, monospace;
+
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
