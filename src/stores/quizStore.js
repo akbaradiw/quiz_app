@@ -15,6 +15,7 @@ export const quizStore = create((set, get) => ({
     return div.textContent || div.innerText;
   },
 
+
   fetchQuestions: async () => {
     try {
       const response = await axios.get(
@@ -28,10 +29,13 @@ export const quizStore = create((set, get) => ({
       }));
       set({ questions: formattedQuestions });
     } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+      console.log(error);}
   },
 
+
+
+
+  
   startTimer: () => {
     set({ timeLeft: 30 }); // Setel timer ke 30 detik atau nilai awal
 
@@ -67,15 +71,15 @@ export const quizStore = create((set, get) => ({
     }
   },
 
-  // handleTimeout: () => {
-  //   // const { currentQuestion, questions } = get();
+  handleTimeout: () => {
+    // const { currentQuestion, questions } = get();
   
-  //   // Jika waktu habis, langsung tampilkan skor tanpa memeriksa pertanyaan berikutnya
-  //   set({ showScore: true });
+    // Jika waktu habis, langsung tampilkan skor tanpa memeriksa pertanyaan berikutnya
+    set({ showScore: true });
   
-  //   // Hentikan interval timer jika masih berjalan
-  //   clearInterval(get().timerInterval);
-  // },
+    // Hentikan interval timer jika masih berjalan
+    clearInterval(get().timerInterval);
+  },
   
 
   resetQuiz: () => {

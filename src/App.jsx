@@ -1,20 +1,24 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home.jsx";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import PrivateRoute from "./component/PrivateRoute/"; // Custom PrivateRoute
 
 function App() {
-
   return (
-
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<PrivateRoute element={Home} />} />
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
-    </BrowserRouter>
-  
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;

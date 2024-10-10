@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { quizStore } from "../stores/quizStore";
+import Logout from "../component/Logout";
 const Quiz = () => {
   const {
     questions,
@@ -9,7 +10,7 @@ const Quiz = () => {
     timeLeft,
     fetchQuestions,
     handleClick,
-    resetQuiz
+    resetQuiz,
   } = quizStore();
 
   useEffect(() => {
@@ -23,28 +24,30 @@ const Quiz = () => {
   }, [questions]);
 
   return (
-    <div className="container bg-zinc-800 border shadow-md  rounded-md p-4 text-center">
+    <div className="bg-zinc-800 w-full border-4 border-double p-4 text-center">
+      <div className="border-4 border-double">
+     
       <div className="min-h-screen flex flex-col justify-center">
+      <Logout />
         {questions.length > 0 ? (
           showScore ? (
-            <div style={{backgroundColor:"#1d1d1e"}} className="border  shadow-lg mx-52 rounded-lg p-4">
+            <div className="border shadow-lg mx-auto max-w-3xl bg-zinc-900  rounded-lg p-4">
               <h2 className="text-xl text-white underline decoration-white decoration-double underline-offset-4 font-semibold mb-4">
-                Total Score 
+                Total Score
               </h2>
               <h2 className="text-xl text-white font-semibold mb-4">
-                 {score} / {questions.length}
+                {score} / {questions.length}
               </h2>
               <button
-                className="bg-yellow-500 text-black font-semibold py-2 px-4 rounded-md hover:bg-red-500"
+                className="bg-yellow-500 text-black font-semibold py-2 px-4 rounded-md hover:bg-red-500 transition duration-300"
                 onClick={resetQuiz}
               >
                 Restart Quiz
               </button>
             </div>
           ) : (
-            
-            <div style={{backgroundColor:"#1d1d1e"}}  className="border  shadow-lg mx-52 rounded-lg p-4">
-               <p className="text-red-500 text-start text-lg font-bold">
+            <div className="border shadow-lg mx-auto max-w-3xl bg-zinc-900 rounded-lg p-4">
+              <p className="text-red-500 text-start text-lg font-bold">
                 Time left: {timeLeft} seconds
               </p>
               <h2 className="text-xl text-white underline decoration-white decoration-double underline-offset-4 font-semibold mb-4">
@@ -53,15 +56,13 @@ const Quiz = () => {
               <p className="text-lg mb-4 text-white font-semibold">
                 {questions[currentQuestion].question}
               </p>
-              
-              {/* Tampilkan waktu tersisa */}
-             
-              
-              <div className="grid grid-cols-1 gap-4 mx-44">
+
+              {/* Options */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto">
                 {questions[currentQuestion].incorrect_answers.map(
                   (option, index) => (
                     <button
-                      className="bg-green-500 text-white py-2 px-2 rounded-xl hover:bg-yellow-500"
+                      className="bg-green-500 text-white py-2 px-2 rounded-xl hover:bg-yellow-500 transition duration-300"
                       key={index}
                       onClick={() => handleClick(option)}
                     >
@@ -70,7 +71,7 @@ const Quiz = () => {
                   )
                 )}
                 <button
-                  className="bg-green-500 text-white py-2 px-2 rounded-xl hover:bg-yellow-500"
+                  className="bg-green-500 text-white py-2 px-2 rounded-xl hover:bg-yellow-500 transition duration-300"
                   onClick={() =>
                     handleClick(questions[currentQuestion].correct_answer)
                   }
@@ -81,9 +82,10 @@ const Quiz = () => {
             </div>
           )
         ) : (
-          <p>Loading...</p>
+          <p className="text-white">Loading...</p>
         )}
       </div>
+    </div>
     </div>
   );
 };
