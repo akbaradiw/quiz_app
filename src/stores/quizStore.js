@@ -15,7 +15,6 @@ export const quizStore = create((set, get) => ({
     return div.textContent || div.innerText;
   },
 
-
   fetchQuestions: async () => {
     try {
       const response = await axios.get(
@@ -29,15 +28,12 @@ export const quizStore = create((set, get) => ({
       }));
       set({ questions: formattedQuestions });
     } catch (error) {
-      console.log(error);}
+      console.log(error);
+    }
   },
 
-
-
-
-  
   startTimer: () => {
-    set({ timeLeft: 30 }); // Setel timer ke 30 detik atau nilai awal
+    set({ timeLeft: 30 });
 
     const interval = setInterval(() => {
       set((state) => {
@@ -45,7 +41,7 @@ export const quizStore = create((set, get) => ({
           return { timeLeft: state.timeLeft - 1 };
         } else {
           clearInterval(get().timerInterval);
-          get().handleTimeout(); // Panggil handleTimeout saat waktu habis
+          get().handleTimeout();
           return { timeLeft: 0 };
         }
       });
@@ -57,30 +53,23 @@ export const quizStore = create((set, get) => ({
   handleClick: (answer) => {
     const { questions, currentQuestion, score } = get();
 
-    // Periksa apakah jawaban benar dan perbarui skor jika benar
     if (answer === questions[currentQuestion].correct_answer) {
       set((state) => ({ score: state.score + 1 }));
     }
 
-    // Perbarui pertanyaan tanpa mereset timer
     if (currentQuestion < questions.length - 1) {
       set((state) => ({ currentQuestion: state.currentQuestion + 1 }));
     } else {
-      clearInterval(get().timerInterval); // Hentikan timer jika sudah tidak ada pertanyaan
-      set({ showScore: true }); // Tampilkan skor jika kuis selesai
+      clearInterval(get().timerInterval);
+      set({ showScore: true });
     }
   },
 
   handleTimeout: () => {
-    // const { currentQuestion, questions } = get();
-  
-    // Jika waktu habis, langsung tampilkan skor tanpa memeriksa pertanyaan berikutnya
     set({ showScore: true });
-  
-    // Hentikan interval timer jika masih berjalan
+
     clearInterval(get().timerInterval);
   },
-  
 
   resetQuiz: () => {
     clearInterval(get().timerInterval);

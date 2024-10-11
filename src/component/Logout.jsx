@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { FaPowerOff } from "react-icons/fa6";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -10,13 +11,13 @@ const Logout = () => {
   };
 
   return (
-    <div className="pb-4" >
-      <button
+    <div className="pb-4 flex justify-center">
+      <FaPowerOff
         onClick={handleLogout}
-        className="bg-red-500 text-white font-semibold p-2 rounded-lg hover:bg-red-600 transition duration-300 ease-in-out text-md md:text-xl"
-      >
-        Logout
-      </button>
+        className="  text-red-500 hover:text-blue-500 hover:cursor-pointer font-semibold p-2 transition duration-300 ease-in-out text-5xl"
+      />
+
+   
     </div>
   );
 };

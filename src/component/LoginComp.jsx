@@ -7,17 +7,17 @@ const LoginComp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Replaces useHistory()
+  const navigate = useNavigate(); 
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
   
-    // Instead of hardcoded credentials, just check if any input is provided
+  
     if (username && password) {
       localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('username', username); // Optionally store the username
-      navigate('/'); // Navigate to the homepage or dashboard after login
+      localStorage.setItem('username', username); 
+      navigate('/'); 
     } else {
       setError('Please enter a username and password');
     }
@@ -26,10 +26,10 @@ const LoginComp = () => {
 
   return (
 
-    <div className="flex justify-center items-center border-4 border-double rounded-md  h-screen px-4">
+    <div className="flex justify-center items-center    h-screen px-4">
     {error && <p className="text-red-500 mb-4">{error}</p>}
     <form
-      className="flex flex-col w-full max-w-md border bg-zinc-800 p-8 rounded-lg shadow-md"
+      className="flex flex-col w-full max-w-md border border-green-500 bg-zinc-800  p-8 rounded-lg shadow-md"
       onSubmit={handleSubmit}
     >
       <input
